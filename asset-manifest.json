@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/hoc_viec/static/css/main.f26dd13e.css",
+    "main.js": "/hoc_viec/static/js/main.3066e9b5.js",
+    "static/media/post1.png": "/hoc_viec/static/media/post1.0c46112e6be39d14ddfe.png",
+    "static/media/post3.png": "/hoc_viec/static/media/post3.8009748982991eeaac80.png",
+    "static/media/post4.png": "/hoc_viec/static/media/post4.a020eee776a620aa7d04.png",
+    "static/media/banner5.png": "/hoc_viec/static/media/banner5.8ff686d6576993739614.png",
+    "static/media/banner4.png": "/hoc_viec/static/media/banner4.db885e5acfd4cf9734d8.png",
+    "static/media/post6.png": "/hoc_viec/static/media/post6.4655a61a29d01c4e3ca2.png",
+    "static/media/course7.png": "/hoc_viec/static/media/course7.b4f3c467a4cdeb9c424a.png",
+    "static/media/course10.png": "/hoc_viec/static/media/course10.dcd3db71f65fb131075a.png",
+    "static/media/course11.png": "/hoc_viec/static/media/course11.de7e6cb27a028de66139.png",
+    "static/media/banner2.png": "/hoc_viec/static/media/banner2.2c340501986fd4125d28.png",
+    "static/media/blog1.png": "/hoc_viec/static/media/blog1.2b503dd33b86de6f2d8d.png",
+    "static/media/post5.jpg": "/hoc_viec/static/media/post5.74a8500ce540850223a9.jpg",
+    "static/media/banner1.png": "/hoc_viec/static/media/banner1.8be3a14cf95ee3e0ce20.png",
+    "static/media/course8.png": "/hoc_viec/static/media/course8.7a5ec6bf3438abfa6a7d.png",
+    "static/media/banner3.png": "/hoc_viec/static/media/banner3.f04ee2e0e169f32b3e2f.png",
+    "static/media/post7.jpg": "/hoc_viec/static/media/post7.7c62cd845798a4f23083.jpg",
+    "static/media/banner6.png": "/hoc_viec/static/media/banner6.ff03e3cd4dfc7534ba11.png",
+    "static/media/post2.jpg": "/hoc_viec/static/media/post2.97697640bcb75ab2bfe8.jpg",
+    "static/media/user2.jpg": "/hoc_viec/static/media/user2.d91fb89bfa6a781f0f78.jpg",
+    "static/media/banner7.png": "/hoc_viec/static/media/banner7.57e5096112b8fe043b7e.png",
+    "static/media/course2.png": "/hoc_viec/static/media/course2.83ed07709be1ef3dae58.png",
+    "static/media/user3.jpg": "/hoc_viec/static/media/user3.e938f44a4abb1e769eb8.jpg",
+    "static/media/course1.png": "/hoc_viec/static/media/course1.b89dc276ccd859e1348c.png",
+    "static/media/user1.jpg": "/hoc_viec/static/media/user1.4d2c84a7cd069fc2d7e6.jpg",
+    "static/media/avatar.jpg": "/hoc_viec/static/media/avatar.290fc8e4637190e84151.jpg",
+    "index.html": "/hoc_viec/index.html",
+    "main.f26dd13e.css.map": "/hoc_viec/static/css/main.f26dd13e.css.map",
+    "main.3066e9b5.js.map": "/hoc_viec/static/js/main.3066e9b5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f26dd13e.css",
+    "static/js/main.3066e9b5.js"
+  ]
+}
