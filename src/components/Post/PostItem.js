@@ -9,10 +9,10 @@ const PostItem = (post) => {
     };
 
     return (
-        <div className="w-[25%] pr-[12px] pl-[12px] mb-[26px]">
+        <div className="w-full">
             <a
                 href="/"
-                className="h-[150px] w-full rounded-[16px] overflow-hidden block relative hover:before:content-[''] hover:before:absolute hover:before:inset-0 hover:before:bg-[rgba(0,0,0,.5)] before:transition-all before:duration-300"
+                className="max-tablet-sm:h-[200px] max-tablet:h-[180px] max-mobile-sm:h-[230px] h-[150px] w-full rounded-[16px] overflow-hidden block relative hover:before:content-[''] hover:before:absolute hover:before:inset-0 hover:before:bg-[rgba(0,0,0,.5)] before:transition-all before:duration-300"
                 onMouseEnter={handleHover}
                 onMouseLeave={handleHover}
             >

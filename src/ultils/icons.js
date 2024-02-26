@@ -1,4 +1,10 @@
-import { IoSearch } from "react-icons/io5";
+import { IoSearch, IoMenu } from "react-icons/io5";
+import {
+    MdKeyboardDoubleArrowLeft,
+    MdKeyboardDoubleArrowRight,
+    MdLogout,
+    MdInfo,
+} from "react-icons/md";
 import {
     FaBell,
     FaCrown,
@@ -6,13 +12,15 @@ import {
     FaYoutube,
     FaTiktok,
     FaArrowUp,
+    FaUser,
+    FaTimes,
 } from "react-icons/fa";
-import { FaRoad, FaUsers, FaCircleCheck } from "react-icons/fa6";
+import { FaRoad, FaUsers, FaCircleCheck, FaBookOpen } from "react-icons/fa6";
 import { FiPlus } from "react-icons/fi";
 import { HiHome, HiOutlineDotsVertical } from "react-icons/hi";
 import { LuNewspaper } from "react-icons/lu";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
-import { IoBookmarkOutline } from "react-icons/io5";
+import { IoBookmarkOutline, IoSettingsSharp } from "react-icons/io5";
 const icons = {
     IoSearch,
     FaBell,
@@ -31,6 +39,15 @@ const icons = {
     IoIosArrowForward,
     IoIosArrowBack,
     IoBookmarkOutline,
+    MdKeyboardDoubleArrowLeft,
+    MdKeyboardDoubleArrowRight,
+    IoMenu,
+    FaUser,
+    FaBookOpen,
+    MdInfo,
+    MdLogout,
+    IoSettingsSharp,
+    FaTimes,
 };
 
 export default icons;

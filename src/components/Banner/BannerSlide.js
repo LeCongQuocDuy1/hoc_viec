@@ -25,8 +25,9 @@ const BannerSlide = () => {
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
     };
+
     return (
-        <div className="w-[1200px]">
+        <div className="w-[1180px] desktop-lg:w-[1270px] max-desktop:w-[1110px] max-laptop:w-full max-tablet-sm:w-full">
             <Slider {...settings}>
                 {banners?.map((item) => (
                     <React.Fragment key={item.id}>

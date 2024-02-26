@@ -15,14 +15,14 @@ body {
     overflow-x: hidden;
 }
 
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 14px; /* width of the entire scrollbar */
 }
-body::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     background: #fff; /* color of the tracking area */
 }
-body::-webkit-scrollbar-thumb {
-    background-color: #6e6e6e; /* color of the scroll thumb */
+::-webkit-scrollbar-thumb {
+    background-color: #e6e6e6; /* color of the scroll thumb */
     border-radius: 16px; /* roundness of the scroll thumb */
     border: 4px solid #fff; /* creates padding around scroll thumb */
 }
@@ -35,6 +35,19 @@ button {
 ul,
 li {
     list-style-type: none;
+}
+
+img {
+    width: 100%;
+}
+
+.one-line {
+    display: block;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .slick-arrow {
@@ -127,3 +140,84 @@ li {
 .theme-7 {
     background: linear-gradient(to right, rgb(118, 18, 255), rgb(5, 178, 255));
 }
+
+/* Responsive */
+
+/* Tablet: width >= 740px and width < 1024px */
+@media (min-width: 740px) and (max-width: 1024px) {
+    html {
+        font-size: 80%;
+    }
+}
+
+/* Mobile: width < 740px */
+@media (max-width: 740px) {
+    html {
+        font-size: 70%;
+    }
+}
+
+/* Mobile: width < 640px */
+@media (max-width: 640px) {
+    .slick-dots li button:before {
+        width: 30px;
+        height: 6px;
+    }
+
+    .slick-dots li:not(:last-child) {
+        margin-right: 20px;
+    }
+
+    .slick-dots li.slick-active button:before {
+        width: 36px;
+    }
+}
+
+/* Mobile: width < 500px */
+@media (max-width: 500px) {
+    .slick-arrow {
+        display: none !important;
+    }
+
+    .slick-dots {
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .slick-dots li button:before {
+        width: 10px;
+        height: 10px;
+    }
+
+    .slick-dots li:not(:last-child) {
+        margin-right: 4px;
+    }
+
+    .slick-dots li.slick-active button:before {
+        width: 10px;
+    }
+}
+
+/*
+PC: width >= 1024px
+@media (min-width: 1100px) {
+}
+
+Tablet: width >= 740px and width < 1024px
+@media (min-width: 740px) and (max-width: 1024px) {
+    html {
+        font-size: 60%;
+    }
+}
+
+Mobile: width < 740px
+@media (max-width: 740px) {
+    html {
+        font-size: 55%;
+    }
+}
+
+Mobile: width < 340px
+@media (max-width: 340px) {
+}
+*/

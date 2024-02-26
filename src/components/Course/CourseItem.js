@@ -9,10 +9,10 @@ const CourseItem = (course) => {
     };
 
     return (
-        <div className="w-[25%] pr-[12px] pl-[12px] mb-[26px]">
+        <div className="">
             <a
                 href="/"
-                className="h-[150px] w-full rounded-[16px] overflow-hidden block relative hover:before:content-[''] hover:before:absolute hover:before:inset-0 hover:before:bg-[rgba(0,0,0,.5)] before:transition-all before:duration-300"
+                className="max-tablet-sm:h-[200px] h-[150px] max-tablet:h-[180px] max-mobile:h-[160px] max-mobile-sm:h-[230px] w-full rounded-[16px] overflow-hidden block relative hover:before:content-[''] hover:before:absolute hover:before:inset-0 hover:before:bg-[rgba(0,0,0,.5)] before:transition-all before:duration-300"
                 onMouseEnter={handleHover}
                 onMouseLeave={handleHover}
             >

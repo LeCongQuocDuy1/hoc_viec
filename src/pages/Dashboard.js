@@ -15,7 +15,7 @@ const Dashboard = () => {
             <Header />
             <div className="flex mb-[80px]">
                 <Sidebar />
-                <div className="flex-1 px-[10px]">
+                <div className="flex-1 max-laptop:w-full max-laptop:flex-none max-laptop:px-[30px] px-[10px]">
                     <Outlet />
                 </div>
             </div>
@@ -29,7 +29,7 @@ const Dashboard = () => {
                             behavior: "smooth",
                         })
                     }
-                    className="fixed z-40 p-2 bg-primary bottom-[50px] right-[50px] rounded-[6px] cursor-pointer hover:opacity-80"
+                    className="fixed z-40 p-2 max-tablet:p-5 bg-primary bottom-[30px] right-[30px] rounded-[6px] cursor-pointer hover:opacity-80"
                 >
                     <icons.FaArrowUp className="text-[20px] text-[#fff]" />
                 </div>

@@ -6,7 +6,7 @@ import blog1 from "../../assets/blogs/blog1.png";
 const BlogItem = () => {
     return (
         <div className="border-[2px] border-[#ccc] rounded-[16px] py-[15px] px-[30px] mb-[16px]">
-            <div className="flex items-center justify-between w-full mb-[20px]">
+            <div className="flex items-center justify-between w-full mb-[10px]">
                 <div className="flex items-center gap-[8px]">
                     <img
                         src={avatar}
@@ -23,12 +23,12 @@ const BlogItem = () => {
                     <icons.HiOutlineDotsVertical className="text-[20px] text-[#444] cursor-pointer hover:opacity-80" />
                 </div>
             </div>
-            <div className="flex items-start gap-[20px] mb-[20px]">
-                <div className="w-[70%]">
-                    <h1 className="text-[22px] font-semibold text-[#000] mb-[10px]">
+            <div className="flex max-laptop:flex-col-reverse items-start gap-[20px] mb-[20px]">
+                <div className="w-[70%] max-mobile:w-full">
+                    <h1 className="text-[22px] font-semibold text-[#000] mb-[10px] max-mobile:w-full">
                         Authentication & Authorization trong ReactJS
                     </h1>
-                    <p className="text-[15px] text-[#444]">
+                    <p className="text-[15px] text-[#444] max-mobile:w-full">
                         Authentication và Authorization là một phần quan trọng
                         trong việc phát triển phần mềm, giúp chúng ta xác thực
                         và phân quyền...
@@ -37,7 +37,7 @@ const BlogItem = () => {
                 <img
                     src={blog1}
                     alt=""
-                    className="w-[30%] h-[130px] rounded-[10px] object-cover bg-[#ccc]"
+                    className="w-[30%] h-[130px] max-mobile:w-full max-laptop:h-[200px] max-mobile:h-[180px] rounded-[10px] object-cover bg-[#ccc]"
                 />
             </div>
             <div className="flex items-center gap-[10px]">

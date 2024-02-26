@@ -4,7 +4,7 @@ import Button from "../Button/Button";
 const LearningItem = () => {
     return (
         <div className="border-[2px] border-[#ccc] rounded-[16px] py-[15px] px-[30px]">
-            <div className="flex items-center gap-[20px] mb-[20px]">
+            <div className="flex max-tablet:flex-col items-center gap-[20px] mb-[20px]">
                 <div className="">
                     <h1 className="text-[26px] font-[900] text-[#000] mb-[10px]">
                         Lộ trình học
@@ -16,15 +16,19 @@ const LearningItem = () => {
                         "Front-end".
                     </p>
                 </div>
-                <div className="text-center border-[5px] border-primary rounded-full w-[330px] h-[115px] overflow-hidden flex items-center justify-center">
-                    <img
-                        src="https://files.fullstack.edu.vn/f8-prod/learning-paths/2/63b4642136f3e.png"
-                        alt=""
-                        className="w-[85%]"
-                    />
-                </div>
+                <img
+                    src="https://files.fullstack.edu.vn/f8-prod/learning-paths/2/63b4642136f3e.png"
+                    alt=""
+                    className="object-contain rounded-full w-[120px] h-[120px] border-[5px] border-primary max-tablet:border-[2px] max-tablet:w-full max-tablet:h-[200px] max-tablet:rounded-[16px]"
+                />
             </div>
-            <Button text="Xem chi tiết" primary={true} />
+            <Button
+                text="Xem chi tiết"
+                primary={true}
+                customPrimary={
+                    "max-laptop:w-full max-laptop:py-[10px] max-laptop:text-[16px]"
+                }
+            />
         </div>
     );
 };

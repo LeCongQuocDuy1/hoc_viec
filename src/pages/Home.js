@@ -8,9 +8,9 @@ const Home = () => {
     const coursesPro = courses.filter((c) => c.isPro);
 
     return (
-        <div className="">
+        <div className="max-laptop:w-full">
             <BannerSlide />
-            <div className="mt-[70px] pl-[36px] pr-[50px]">
+            <div className="mt-[70px] max-mobile:mt-[40px] pl-[36px] pr-[50px] max-laptop:pr-[0px] max-mobile:pl-[0px] max-laptop-sm:pr-[0px]">
                 <div className="">
                     <HomeTitle content="Khóa học Pro" label="Mới" />
                     <CourseList courses={coursesPro} />

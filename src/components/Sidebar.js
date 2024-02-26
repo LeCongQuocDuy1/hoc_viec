@@ -5,7 +5,7 @@ import { menus } from "../ultils/menus";
 
 const Sidebar = () => {
     return (
-        <div className="sticky top-[80px] left-0 w-[110px] bg-[#fff] h-screen">
+        <div className="sticky top-[80px] left-0 w-[110px] bg-[#fff] h-screen max-laptop:hidden">
             <div className="z-10 flex flex-col items-center justify-center w-full">
                 {/* Button */}
                 <div className="h-[44px] w-[44px] rounded-full bg-blue-600 flex items-center justify-center group cursor-pointer">
