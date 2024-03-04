@@ -1,12 +1,13 @@
 {
   "files": {
-    "main.css": "/hoc_viec/static/css/main.f26dd13e.css",
-    "main.js": "/hoc_viec/static/js/main.3066e9b5.js",
+    "main.css": "/hoc_viec/static/css/main.ad8f5dfd.css",
+    "main.js": "/hoc_viec/static/js/main.2a7f3728.js",
     "static/media/post1.png": "/hoc_viec/static/media/post1.0c46112e6be39d14ddfe.png",
     "static/media/post3.png": "/hoc_viec/static/media/post3.8009748982991eeaac80.png",
     "static/media/post4.png": "/hoc_viec/static/media/post4.a020eee776a620aa7d04.png",
     "static/media/banner5.png": "/hoc_viec/static/media/banner5.8ff686d6576993739614.png",
     "static/media/banner4.png": "/hoc_viec/static/media/banner4.db885e5acfd4cf9734d8.png",
+    "static/media/jp.png": "/hoc_viec/static/media/jp.7e69601338c0317ec418.png",
     "static/media/post6.png": "/hoc_viec/static/media/post6.4655a61a29d01c4e3ca2.png",
     "static/media/course7.png": "/hoc_viec/static/media/course7.b4f3c467a4cdeb9c424a.png",
     "static/media/course10.png": "/hoc_viec/static/media/course10.dcd3db71f65fb131075a.png",
@@ -28,11 +29,11 @@
     "static/media/user1.jpg": "/hoc_viec/static/media/user1.4d2c84a7cd069fc2d7e6.jpg",
     "static/media/avatar.jpg": "/hoc_viec/static/media/avatar.290fc8e4637190e84151.jpg",
     "index.html": "/hoc_viec/index.html",
-    "main.f26dd13e.css.map": "/hoc_viec/static/css/main.f26dd13e.css.map",
-    "main.3066e9b5.js.map": "/hoc_viec/static/js/main.3066e9b5.js.map"
+    "main.ad8f5dfd.css.map": "/hoc_viec/static/css/main.ad8f5dfd.css.map",
+    "main.2a7f3728.js.map": "/hoc_viec/static/js/main.2a7f3728.js.map"
   },
   "entrypoints": [
-    "static/css/main.f26dd13e.css",
-    "static/js/main.3066e9b5.js"
+    "static/css/main.ad8f5dfd.css",
+    "static/js/main.2a7f3728.js"
   ]
 }
