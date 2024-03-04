@@ -4,11 +4,15 @@ import avatar from "../assets/avatar.jpg";
 import icons from "../ultils/icons";
 import { NavLink } from "react-router-dom";
 import { menu2s } from "../ultils/menus";
+import { LANGUAGES } from "../ultils/constants";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
+    const { i18n, t } = useTranslation();
     const [activeCourse, setActiveCourse] = useState(false);
     const [activeNotifi, setActiveNotifi] = useState(false);
     const [activeMenus, setActiveMenus] = useState(false);
+    const [activeLang, setActiveLang] = useState(false);
 
     const handleMenus = (e) => {
         e.stopPropagation();
@@ -17,6 +21,36 @@ const Header = () => {
             behavior: "auto",
         });
         setActiveMenus(!activeMenus);
+    };
+
+    /**
+     * Change multi languages
+     * @param {Number} index
+     * @param {String} code
+     * No return value
+     */
+
+    const changeLang = (index, code) => {
+        // Use the built-in changeLanguage function of the i18next library to change languages
+        i18n.changeLanguage(code, (err) => {
+            if (err) {
+                // Handle errors
+                return console.log("Lỗi khi thay đổi ngôn ngữ:", err);
+            }
+        });
+
+        // LANGUAGES is a self-generated array, which contains different language elements
+        // Gets an element different from the newly selected element
+        const remainLangs = LANGUAGES.filter(
+            (item) => item !== LANGUAGES[index]
+        );
+
+        // Check to see which element has a code equal to the code you just selected, then change the isActive value
+        // The isActive value determines which elements will be shown or hidden on the interface
+        if (LANGUAGES[index].code === code) {
+            LANGUAGES[index].isActive = true;
+            remainLangs.map((item) => (item.isActive = false));
+        }
     };
 
     return (
@@ -157,12 +191,10 @@ const Header = () => {
                     <img
                         src={logo}
                         alt="Logo"
-                        className="h-[38px] w-[38px] rounded-[8px]"
+                        className="h-[38px] w-[38px] max-w-[60px] rounded-[8px]"
                     />
                 </a>
-                <h4 className="text-[14px] font-bold">
-                    Học Lập Trình Để Đi Làm
-                </h4>
+                <h4 className="text-[14px] font-bold">{t("titleLogo")}</h4>
             </div>
             {/* Header Search */}
             <div className="max-mobile-sm:hidden flex items-center gap-[10px] border-[2px] max-laptop:absolute max-laptop:left-[80px] px-[12px] py-[4px] border-[#e8e8e8] rounded-[20px] focus-within:border-[#444] transition-all duration-300">
@@ -170,11 +202,50 @@ const Header = () => {
                 <input
                     type="text"
                     className="text-[14px] text-[#444] leading-[2] w-[380px] max-laptop:w-[350px] max-mobile:w-[260px]"
-                    placeholder="Tìm kiếm khóa học, bài viết, video, ..."
+                    placeholder={t("placeholderSearch")}
                 />
             </div>
             {/* Header Options */}
-            <div className="flex items-center gap-[20px] relative">
+            <div className="flex items-center max-mobile:gap-[12px] max-tablet-sm:gap-[5px] gap-[20px] relative">
+                <div
+                    className="relative hover:bg-[#e7e7e7] cursor-pointer rounded-[20px] py-[6px] px-[10px]"
+                    onClick={() => {
+                        setActiveLang(!activeLang);
+                    }}
+                >
+                    {LANGUAGES.map(
+                        (item) =>
+                            item.isActive && (
+                                <div
+                                    key={item.id}
+                                    className="flex items-center gap-[5px] leading-[0px]"
+                                >
+                                    <img
+                                        src={item.image}
+                                        alt={item.text}
+                                        className="w-[20px] h-[20px] rounded-full"
+                                    />
+                                    <span className="text-[14px] font-semibold text-[#444] uppercase">
+                                        {item.text}
+                                    </span>
+                                </div>
+                            )
+                    )}
+
+                    {activeLang && (
+                        <div className="absolute top-[36px] right-[5px] bg-[#fff] w-[130px] rounded-[10px] py-[5px] z-20 shadow-main">
+                            {LANGUAGES.map((item, index) => (
+                                <p
+                                    key={index}
+                                    onClick={() => changeLang(index, item.code)}
+                                    className="text-[14px] font-semibold text-[#444] w-full text-center hover:bg-[#d3d3d3] leading-[30px] py-[5px]"
+                                >
+                                    {item.label}
+                                </p>
+                            ))}
+                        </div>
+                    )}
+                </div>
                 <div className="">
                     <h3
                         className="text-[14px] text-[#444] font-semibold cursor-pointer max-laptop:hidden"
@@ -182,7 +253,7 @@ const Header = () => {
                             setActiveCourse(!activeCourse);
                         }}
                     >
-                        Khóa học của tôi
+                        {t("myCourse")}
                     </h3>
                     {activeCourse && (
                         <div className="absolute top-[55px] right-[80px] bg-[#fff] w-[380px] max-h-[500px] overflow-hidden rounded-[10px] z-10 shadow-main">

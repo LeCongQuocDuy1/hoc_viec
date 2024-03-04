@@ -49,5 +49,4 @@ const icons = {
     IoSettingsSharp,
     FaTimes,
 };
-
 export default icons;

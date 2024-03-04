@@ -50,6 +50,15 @@ img {
     text-overflow: ellipsis;
 }
 
+.third-line {
+    display: block;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .slick-arrow {
     border-radius: 100%;
     z-index: 2;

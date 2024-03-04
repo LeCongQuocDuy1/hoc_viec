@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Header, Footer, Sidebar } from "../components";
 import icons from "../ultils/icons";
@@ -6,9 +6,17 @@ import icons from "../ultils/icons";
 const Dashboard = () => {
     const [scrollValue, setScrollValue] = useState(0);
 
-    window.addEventListener("scroll", () => {
-        setScrollValue(window.scrollY);
-    });
+    useEffect(() => {
+        window.addEventListener("scroll", () => {
+            setScrollValue(window.scrollY);
+        });
+
+        return () => {
+            window.removeEventListener("scroll", () => {
+                setScrollValue(window.scrollY);
+            });
+        };
+    }, [scrollValue]);
 
     return (
         <div className="pt-[80px] bg-[#fff] relative">

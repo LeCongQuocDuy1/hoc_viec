@@ -2,7 +2,7 @@ import React from "react";
 import Slider from "react-slick";
 import BannerItem from "./BannerItem";
 import icons from "../../ultils/icons";
-import { banners } from "../../ultils/banners";
+import { useTranslation } from "react-i18next";
 
 const PrevArrow = ({ currentSlide, slideCount, ...arrowProps }) => (
     <icons.IoIosArrowBack {...arrowProps} />
@@ -13,6 +13,7 @@ const NextArrow = ({ currentSlide, slideCount, ...arrowProps }) => (
 );
 
 const BannerSlide = () => {
+    const { t } = useTranslation();
     const settings = {
         dots: true,
         infinite: true,
@@ -29,7 +30,7 @@ const BannerSlide = () => {
     return (
         <div className="w-[1180px] desktop-lg:w-[1270px] max-desktop:w-[1110px] max-laptop:w-full max-tablet-sm:w-full">
             <Slider {...settings}>
-                {banners?.map((item) => (
+                {t("bannerSlide")?.map((item) => (
                     <React.Fragment key={item.id}>
                         <BannerItem banner={item} />
                     </React.Fragment>

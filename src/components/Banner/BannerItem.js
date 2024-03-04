@@ -3,7 +3,6 @@ import Button from "../Button/Button";
 
 const BannerItem = (banner) => {
     const { title, desc, image, textBtn, theme = "" } = banner.banner;
-    // flex items-center justify-between
     const className = `${theme} h-[272px] max-tablet:h-[240px] max-mobile:h-[200px] max-mobile-sm:h-[200px] rounded-[16px] relative`;
     return (
         <div className={className}>
@@ -11,7 +10,9 @@ const BannerItem = (banner) => {
                 <h1 className="text-[32px] max-laptop:text-[28px] max-tablet-sm:text-[22px] max-tablet:text-[20px] max-mobile:text-[18px] max-mobile-sm:text-[15px] font-bold mb-[5px] max-mobile-sm:mb-[15px]">
                     {title}
                 </h1>
-                <p className="mb-[20px] max-mobile-sm:hidden">{desc}</p>
+                <p className="mb-[20px] max-mobile-sm:hidden third-line">
+                    {desc}
+                </p>
                 <Button text={textBtn} outline={true} />
             </div>
             <img

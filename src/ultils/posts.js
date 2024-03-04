@@ -103,3 +103,97 @@ export const posts = [
         readTime: 4,
     },
 ];
+
+export const postsEN = [
+    {
+        id: 1,
+        title: "Compilation of students' products at F8 👏👏",
+        description:
+            "This article is to summarize the projects that F8 students have completed and shared on the F8 Web Programming Learning group. The projects below were randomly selected by me to post and are not for ranking purposes. Please.",
+        thumbnail: post1,
+        author: {
+            name: "Admin",
+            avatar: avatar,
+            isAdmin: true,
+        },
+        readTime: 6,
+    },
+    {
+        id: 2,
+        title: "[Part 1] Creating a ReactJS project with Webpack and Babel",
+        description:
+            'Today I recorded a video in the ReactJS course "Creating a ReactJS project with Webpack and Babel".',
+        thumbnail: post2,
+        author: {
+            name: "Hong Nguyen",
+            avatar: user1,
+            isAdmin: false,
+        },
+        readTime: 10,
+    },
+    {
+        id: 3,
+        title: "Memoir of the 25th day studying at F8",
+        description:
+            "Hey, my name is also Son but I'm a newbie and Mr. Son is the boss :))). I'm also new to programming, I'm a 1st year student.",
+        thumbnail: post3,
+        author: {
+            name: "guegkew",
+            avatar: user3,
+            isAdmin: false,
+        },
+        readTime: 5,
+    },
+    {
+        id: 4,
+        title: "Useful resources for a front-end developer",
+        description:
+            "This article is to summarize the projects that F8 students have completed and shared on the F8 Web Programming Learning group. The projects below were randomly selected by me to post and are not for ranking purposes. Please.",
+        thumbnail: post4,
+        author: {
+            name: "Giang Tran",
+            avatar: user2,
+            isAdmin: false,
+        },
+        readTime: 6,
+    },
+    {
+        id: 5,
+        title: "Time and Motivation",
+        description:
+            'Today I recorded a video in the ReactJS course "Creating a ReactJS project with Webpack and Babel".',
+        thumbnail: post5,
+        author: {
+            name: "grltlpl",
+            avatar: user1,
+            isAdmin: false,
+        },
+        readTime: 8,
+    },
+    {
+        id: 6,
+        title: "Summary of basic English self-study materials.",
+        description:
+            "Hey, my name is also Son but I'm a newbie and Mr. Son is the boss :))). I'm also new to programming, I'm a 1st year student.",
+        thumbnail: post6,
+        author: {
+            name: "hrtiop",
+            avatar: user2,
+            isAdmin: false,
+        },
+        readTime: 3,
+    },
+    {
+        id: 7,
+        title: "What is the right way to study?",
+        description:
+            "Hey, my name is also Son but I'm a newbie and Mr. Son is the boss :))). I'm also new to programming, I'm a 1st year student.",
+        thumbnail: post7,
+        author: {
+            name: "Tioemqwr",
+            avatar: user3,
+            isAdmin: false,
+        },
+        readTime: 4,
+    },
+];

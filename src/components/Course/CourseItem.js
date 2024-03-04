@@ -36,7 +36,7 @@ const CourseItem = (course) => {
             </a>
             <a
                 href="/"
-                className="text-[#000] text-[17px] font-semibold mt-[15px] mb-[5px] block"
+                className="text-[#000] text-[17px] font-semibold mt-[15px] mb-[5px] block truncate"
             >
                 {course?.course?.title}
             </a>
