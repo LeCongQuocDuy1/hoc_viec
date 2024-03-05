@@ -6,13 +6,18 @@ import { NavLink } from "react-router-dom";
 import { menu2s } from "../ultils/menus";
 import { LANGUAGES } from "../ultils/constants";
 import { useTranslation } from "react-i18next";
+import Form from "./Form/Form";
 
 const Header = () => {
     const { i18n, t } = useTranslation();
+    const [userLogged, setUserLogged] = useState();
     const [activeCourse, setActiveCourse] = useState(false);
     const [activeNotifi, setActiveNotifi] = useState(false);
     const [activeMenus, setActiveMenus] = useState(false);
     const [activeLang, setActiveLang] = useState(false);
+    const [activeProfile, setActiveProfile] = useState(false);
+    const [activeForm, setActiveForm] = useState(false);
+    const [isRegister, setIsRegister] = useState(false);
 
     const handleMenus = (e) => {
         e.stopPropagation();
@@ -22,13 +27,6 @@ const Header = () => {
         });
         setActiveMenus(!activeMenus);
     };
-
-    /**
-     * Change multi languages
-     * @param {Number} index
-     * @param {String} code
-     * No return value
-     */
 
     const changeLang = (index, code) => {
         // Use the built-in changeLanguage function of the i18next library to change languages
@@ -206,382 +204,503 @@ const Header = () => {
                 />
             </div>
             {/* Header Options */}
-            <div className="flex items-center max-mobile:gap-[12px] max-tablet-sm:gap-[5px] gap-[20px] relative">
-                <div
-                    className="relative hover:bg-[#e7e7e7] cursor-pointer rounded-[20px] py-[6px] px-[10px]"
-                    onClick={() => {
-                        setActiveLang(!activeLang);
-                    }}
-                >
-                    {LANGUAGES.map(
-                        (item) =>
-                            item.isActive && (
-                                <div
-                                    key={item.id}
-                                    className="flex items-center gap-[5px] leading-[0px]"
-                                >
-                                    <img
-                                        src={item.image}
-                                        alt={item.text}
-                                        className="w-[20px] h-[20px] rounded-full"
-                                    />
-                                    <span className="text-[14px] font-semibold text-[#444] uppercase">
-                                        {item.text}
-                                    </span>
-                                </div>
-                            )
-                    )}
-
-                    {activeLang && (
-                        <div className="absolute top-[36px] right-[5px] bg-[#fff] w-[130px] rounded-[10px] py-[5px] z-20 shadow-main">
-                            {LANGUAGES.map((item, index) => (
-                                <p
-                                    key={index}
-                                    onClick={() => changeLang(index, item.code)}
-                                    className="text-[14px] font-semibold text-[#444] w-full text-center hover:bg-[#d3d3d3] leading-[30px] py-[5px]"
-                                >
-                                    {item.label}
-                                </p>
-                            ))}
-                        </div>
-                    )}
-                </div>
-                <div className="">
-                    <h3
-                        className="text-[14px] text-[#444] font-semibold cursor-pointer max-laptop:hidden"
+            {userLogged ? (
+                <div className="flex items-center max-mobile:gap-[12px] max-tablet-sm:gap-[5px] gap-[20px] relative">
+                    <div
+                        className="relative hover:bg-[#e7e7e7] cursor-pointer rounded-[20px] py-[6px] px-[10px]"
                         onClick={() => {
-                            setActiveCourse(!activeCourse);
+                            setActiveLang(!activeLang);
                         }}
                     >
-                        {t("myCourse")}
-                    </h3>
-                    {activeCourse && (
-                        <div className="absolute top-[55px] right-[80px] bg-[#fff] w-[380px] max-h-[500px] overflow-hidden rounded-[10px] z-10 shadow-main">
-                            <div className="sticky top-0 left-0 right-0 z-20 bg-[#fff] flex items-center justify-between px-5 py-4">
-                                <h3 className="text-[18px] font-semibold leading-[10px]">
-                                    Khóa học của tôi
-                                </h3>
-                                <p className="text-[14px] text-primary hover:bg-[#f0f0f0] cursor-pointer p-2 rounded-[6px] leading-[10px]">
-                                    Xem tất cả
-                                </p>
+                        {LANGUAGES.map(
+                            (item) =>
+                                item.isActive && (
+                                    <div
+                                        key={item.id}
+                                        className="flex items-center gap-[5px] leading-[0px]"
+                                    >
+                                        <img
+                                            src={item.image}
+                                            alt={item.text}
+                                            className="w-[20px] h-[20px] rounded-full"
+                                        />
+                                        <span className="text-[14px] font-semibold text-[#444] uppercase">
+                                            {item.text}
+                                        </span>
+                                    </div>
+                                )
+                        )}
+
+                        {activeLang && (
+                            <div className="absolute top-[36px] right-[5px] bg-[#fff] w-[130px] rounded-[10px] py-[5px] z-20 shadow-main">
+                                {LANGUAGES.map((item, index) => (
+                                    <p
+                                        key={index}
+                                        onClick={() =>
+                                            changeLang(index, item.code)
+                                        }
+                                        className="text-[14px] font-semibold text-[#444] w-full text-center hover:bg-[#d3d3d3] leading-[30px] py-[5px]"
+                                    >
+                                        {item.label}
+                                    </p>
+                                ))}
                             </div>
-                            <div className="flex-col p-2 overflow-y-scroll max-h-[500px]">
-                                <div className="flex items-center w-full gap-[15px] cursor-pointer hover:bg-[#e6e6e6] px-3 py-2 rounded-[10px]">
-                                    <img
-                                        src="https://files.fullstack.edu.vn/f8-prod/courses/7.png"
-                                        alt=""
-                                        className="w-[130px] h-[70px] object-cover rounded-[6px] cursor-pointer"
-                                    />
-                                    <div className="flex-1">
-                                        <p className="cursor-pointer text-[16px] font-semibold mb-[10px] leading-[10px]">
-                                            Kiến thức nhập môn IT
-                                        </p>
-                                        <p className="text-[12px] text-[#333] leading-[10px] mb-[14px]">
-                                            Học cách đây 1 tháng trước
-                                        </p>
-                                        <div className="w-full h-[8px] bg-[#e7e7e7] rounded-[16px] relative before:content-[''] before:absolute before:w-[80%] before:bg-primary before:h-full before:rounded-tl-[16px] before:rounded-bl-[16px]"></div>
-                                    </div>
+                        )}
+                    </div>
+                    <div className="">
+                        <h3
+                            className="text-[14px] text-[#444] font-semibold cursor-pointer max-laptop:hidden"
+                            onClick={() => {
+                                setActiveCourse(!activeCourse);
+                            }}
+                        >
+                            {t("myCourse")}
+                        </h3>
+                        {activeCourse && (
+                            <div className="absolute top-[55px] right-[80px] bg-[#fff] w-[380px] max-h-[500px] overflow-hidden rounded-[10px] z-10 shadow-main">
+                                <div className="sticky top-0 left-0 right-0 z-20 bg-[#fff] flex items-center justify-between px-5 py-4">
+                                    <h3 className="text-[18px] font-semibold leading-[10px]">
+                                        Khóa học của tôi
+                                    </h3>
+                                    <p className="text-[14px] text-primary hover:bg-[#f0f0f0] cursor-pointer p-2 rounded-[6px] leading-[10px]">
+                                        Xem tất cả
+                                    </p>
                                 </div>
-                                <div className="flex items-center w-full gap-[15px] cursor-pointer hover:bg-[#e6e6e6] px-3 py-2 rounded-[10px]">
-                                    <img
-                                        src="https://files.fullstack.edu.vn/f8-prod/courses/2.png"
-                                        alt=""
-                                        className="w-[130px] h-[70px] object-cover rounded-[6px] cursor-pointer"
-                                    />
-                                    <div className="flex-1">
-                                        <p className="cursor-pointer text-[16px] font-semibold mb-[10px] leading-[10px]">
-                                            Kiến thức nhập môn IT
-                                        </p>
-                                        <p className="text-[12px] text-[#333] leading-[10px] mb-[14px]">
-                                            Học cách đây 1 tháng trước
-                                        </p>
-                                        <div className="w-full h-[8px] bg-[#e7e7e7] rounded-[16px] relative before:content-[''] before:absolute before:w-[80%] before:bg-primary before:h-full before:rounded-tl-[16px] before:rounded-bl-[16px]"></div>
+                                <div className="flex-col p-2 overflow-y-scroll max-h-[500px]">
+                                    <div className="flex items-center w-full gap-[15px] cursor-pointer hover:bg-[#e6e6e6] px-3 py-2 rounded-[10px]">
+                                        <img
+                                            src="https://files.fullstack.edu.vn/f8-prod/courses/7.png"
+                                            alt=""
+                                            className="w-[130px] h-[70px] object-cover rounded-[6px] cursor-pointer"
+                                        />
+                                        <div className="flex-1">
+                                            <p className="cursor-pointer text-[16px] font-semibold mb-[10px] leading-[10px]">
+                                                Kiến thức nhập môn IT
+                                            </p>
+                                            <p className="text-[12px] text-[#333] leading-[10px] mb-[14px]">
+                                                Học cách đây 1 tháng trước
+                                            </p>
+                                            <div className="w-full h-[8px] bg-[#e7e7e7] rounded-[16px] relative before:content-[''] before:absolute before:w-[80%] before:bg-primary before:h-full before:rounded-tl-[16px] before:rounded-bl-[16px]"></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="flex items-center w-full gap-[15px] cursor-pointer hover:bg-[#e6e6e6] px-3 py-2 rounded-[10px]">
-                                    <img
-                                        src="https://files.fullstack.edu.vn/f8-prod/courses/14/624faac11d109.png"
-                                        alt=""
-                                        className="w-[130px] h-[70px] object-cover rounded-[6px] cursor-pointer"
-                                    />
-                                    <div className="flex-1">
-                                        <p className="cursor-pointer text-[16px] font-semibold mb-[10px] leading-[10px]">
-                                            Kiến thức nhập môn IT
-                                        </p>
-                                        <p className="text-[12px] text-[#333] leading-[10px] mb-[14px]">
-                                            Học cách đây 1 tháng trước
-                                        </p>
-                                        <div className="w-full h-[8px] bg-[#e7e7e7] rounded-[16px] relative before:content-[''] before:absolute before:w-[80%] before:bg-primary before:h-full before:rounded-tl-[16px] before:rounded-bl-[16px]"></div>
+                                    <div className="flex items-center w-full gap-[15px] cursor-pointer hover:bg-[#e6e6e6] px-3 py-2 rounded-[10px]">
+                                        <img
+                                            src="https://files.fullstack.edu.vn/f8-prod/courses/2.png"
+                                            alt=""
+                                            className="w-[130px] h-[70px] object-cover rounded-[6px] cursor-pointer"
+                                        />
+                                        <div className="flex-1">
+                                            <p className="cursor-pointer text-[16px] font-semibold mb-[10px] leading-[10px]">
+                                                Kiến thức nhập môn IT
+                                            </p>
+                                            <p className="text-[12px] text-[#333] leading-[10px] mb-[14px]">
+                                                Học cách đây 1 tháng trước
+                                            </p>
+                                            <div className="w-full h-[8px] bg-[#e7e7e7] rounded-[16px] relative before:content-[''] before:absolute before:w-[80%] before:bg-primary before:h-full before:rounded-tl-[16px] before:rounded-bl-[16px]"></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="flex items-center w-full gap-[15px] cursor-pointer hover:bg-[#e6e6e6] px-3 py-2 rounded-[10px]">
-                                    <img
-                                        src="https://files.fullstack.edu.vn/f8-prod/courses/3.png"
-                                        alt=""
-                                        className="w-[130px] h-[70px] object-cover rounded-[6px] cursor-pointer"
-                                    />
-                                    <div className="flex-1">
-                                        <p className="cursor-pointer text-[16px] font-semibold mb-[10px] leading-[10px]">
-                                            Kiến thức nhập môn IT
-                                        </p>
-                                        <p className="text-[12px] text-[#333] leading-[10px] mb-[14px]">
-                                            Học cách đây 1 tháng trước
-                                        </p>
-                                        <div className="w-full h-[8px] bg-[#e7e7e7] rounded-[16px] relative before:content-[''] before:absolute before:w-[80%] before:bg-primary before:h-full before:rounded-tl-[16px] before:rounded-bl-[16px]"></div>
+                                    <div className="flex items-center w-full gap-[15px] cursor-pointer hover:bg-[#e6e6e6] px-3 py-2 rounded-[10px]">
+                                        <img
+                                            src="https://files.fullstack.edu.vn/f8-prod/courses/14/624faac11d109.png"
+                                            alt=""
+                                            className="w-[130px] h-[70px] object-cover rounded-[6px] cursor-pointer"
+                                        />
+                                        <div className="flex-1">
+                                            <p className="cursor-pointer text-[16px] font-semibold mb-[10px] leading-[10px]">
+                                                Kiến thức nhập môn IT
+                                            </p>
+                                            <p className="text-[12px] text-[#333] leading-[10px] mb-[14px]">
+                                                Học cách đây 1 tháng trước
+                                            </p>
+                                            <div className="w-full h-[8px] bg-[#e7e7e7] rounded-[16px] relative before:content-[''] before:absolute before:w-[80%] before:bg-primary before:h-full before:rounded-tl-[16px] before:rounded-bl-[16px]"></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="flex items-center w-full gap-[15px] cursor-pointer hover:bg-[#e6e6e6] px-3 py-2 rounded-[10px]">
-                                    <img
-                                        src="https://files.fullstack.edu.vn/f8-prod/courses/12.png"
-                                        alt=""
-                                        className="w-[130px] h-[70px] object-cover rounded-[6px] cursor-pointer"
-                                    />
-                                    <div className="flex-1">
-                                        <p className="cursor-pointer text-[16px] font-semibold mb-[10px] leading-[10px]">
-                                            Kiến thức nhập môn IT
-                                        </p>
-                                        <p className="text-[12px] text-[#333] leading-[10px] mb-[14px]">
-                                            Học cách đây 1 tháng trước
-                                        </p>
-                                        <div className="w-full h-[8px] bg-[#e7e7e7] rounded-[16px] relative before:content-[''] before:absolute before:w-[80%] before:bg-primary before:h-full before:rounded-tl-[16px] before:rounded-bl-[16px]"></div>
+                                    <div className="flex items-center w-full gap-[15px] cursor-pointer hover:bg-[#e6e6e6] px-3 py-2 rounded-[10px]">
+                                        <img
+                                            src="https://files.fullstack.edu.vn/f8-prod/courses/3.png"
+                                            alt=""
+                                            className="w-[130px] h-[70px] object-cover rounded-[6px] cursor-pointer"
+                                        />
+                                        <div className="flex-1">
+                                            <p className="cursor-pointer text-[16px] font-semibold mb-[10px] leading-[10px]">
+                                                Kiến thức nhập môn IT
+                                            </p>
+                                            <p className="text-[12px] text-[#333] leading-[10px] mb-[14px]">
+                                                Học cách đây 1 tháng trước
+                                            </p>
+                                            <div className="w-full h-[8px] bg-[#e7e7e7] rounded-[16px] relative before:content-[''] before:absolute before:w-[80%] before:bg-primary before:h-full before:rounded-tl-[16px] before:rounded-bl-[16px]"></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="flex items-center w-full gap-[15px] cursor-pointer hover:bg-[#e6e6e6] px-3 py-2 rounded-[10px]">
-                                    <img
-                                        src="https://files.fullstack.edu.vn/f8-prod/courses/1.png"
-                                        alt=""
-                                        className="w-[130px] h-[70px] object-cover rounded-[6px] cursor-pointer"
-                                    />
-                                    <div className="flex-1">
-                                        <p className="cursor-pointer text-[16px] font-semibold mb-[10px] leading-[10px]">
-                                            Kiến thức nhập môn IT
-                                        </p>
-                                        <p className="text-[12px] text-[#333] leading-[10px] mb-[14px]">
-                                            Học cách đây 1 tháng trước
-                                        </p>
-                                        <div className="w-full h-[8px] bg-[#e7e7e7] rounded-[16px] relative before:content-[''] before:absolute before:w-[80%] before:bg-primary before:h-full before:rounded-tl-[16px] before:rounded-bl-[16px]"></div>
+                                    <div className="flex items-center w-full gap-[15px] cursor-pointer hover:bg-[#e6e6e6] px-3 py-2 rounded-[10px]">
+                                        <img
+                                            src="https://files.fullstack.edu.vn/f8-prod/courses/12.png"
+                                            alt=""
+                                            className="w-[130px] h-[70px] object-cover rounded-[6px] cursor-pointer"
+                                        />
+                                        <div className="flex-1">
+                                            <p className="cursor-pointer text-[16px] font-semibold mb-[10px] leading-[10px]">
+                                                Kiến thức nhập môn IT
+                                            </p>
+                                            <p className="text-[12px] text-[#333] leading-[10px] mb-[14px]">
+                                                Học cách đây 1 tháng trước
+                                            </p>
+                                            <div className="w-full h-[8px] bg-[#e7e7e7] rounded-[16px] relative before:content-[''] before:absolute before:w-[80%] before:bg-primary before:h-full before:rounded-tl-[16px] before:rounded-bl-[16px]"></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="flex items-center w-full gap-[15px] cursor-pointer hover:bg-[#e6e6e6] px-3 py-2 rounded-[10px]">
-                                    <img
-                                        src="https://files.fullstack.edu.vn/f8-prod/courses/13/13.png"
-                                        alt=""
-                                        className="w-[130px] h-[70px] object-cover rounded-[6px] cursor-pointer"
-                                    />
-                                    <div className="flex-1">
-                                        <p className="cursor-pointer text-[16px] font-semibold mb-[10px] leading-[10px]">
-                                            Kiến thức nhập môn IT
-                                        </p>
-                                        <p className="text-[12px] text-[#333] leading-[10px] mb-[14px]">
-                                            Học cách đây 1 tháng trước
-                                        </p>
-                                        <div className="w-full h-[8px] bg-[#e7e7e7] rounded-[16px] relative before:content-[''] before:absolute before:w-[80%] before:bg-primary before:h-full before:rounded-tl-[16px] before:rounded-bl-[16px]"></div>
+                                    <div className="flex items-center w-full gap-[15px] cursor-pointer hover:bg-[#e6e6e6] px-3 py-2 rounded-[10px]">
+                                        <img
+                                            src="https://files.fullstack.edu.vn/f8-prod/courses/1.png"
+                                            alt=""
+                                            className="w-[130px] h-[70px] object-cover rounded-[6px] cursor-pointer"
+                                        />
+                                        <div className="flex-1">
+                                            <p className="cursor-pointer text-[16px] font-semibold mb-[10px] leading-[10px]">
+                                                Kiến thức nhập môn IT
+                                            </p>
+                                            <p className="text-[12px] text-[#333] leading-[10px] mb-[14px]">
+                                                Học cách đây 1 tháng trước
+                                            </p>
+                                            <div className="w-full h-[8px] bg-[#e7e7e7] rounded-[16px] relative before:content-[''] before:absolute before:w-[80%] before:bg-primary before:h-full before:rounded-tl-[16px] before:rounded-bl-[16px]"></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="flex items-center w-full gap-[15px] cursor-pointer hover:bg-[#e6e6e6] px-3 py-2 rounded-[10px]">
-                                    <img
-                                        src="https://files.fullstack.edu.vn/f8-prod/courses/6.png"
-                                        alt=""
-                                        className="w-[130px] h-[70px] object-cover rounded-[6px] cursor-pointer"
-                                    />
-                                    <div className="flex-1">
-                                        <p className="cursor-pointer text-[16px] font-semibold mb-[10px] leading-[10px]">
-                                            Kiến thức nhập môn IT
-                                        </p>
-                                        <p className="text-[12px] text-[#333] leading-[10px] mb-[14px]">
-                                            Học cách đây 1 tháng trước
-                                        </p>
-                                        <div className="w-full h-[8px] bg-[#e7e7e7] rounded-[16px] relative before:content-[''] before:absolute before:w-[80%] before:bg-primary before:h-full before:rounded-tl-[16px] before:rounded-bl-[16px]"></div>
+                                    <div className="flex items-center w-full gap-[15px] cursor-pointer hover:bg-[#e6e6e6] px-3 py-2 rounded-[10px]">
+                                        <img
+                                            src="https://files.fullstack.edu.vn/f8-prod/courses/13/13.png"
+                                            alt=""
+                                            className="w-[130px] h-[70px] object-cover rounded-[6px] cursor-pointer"
+                                        />
+                                        <div className="flex-1">
+                                            <p className="cursor-pointer text-[16px] font-semibold mb-[10px] leading-[10px]">
+                                                Kiến thức nhập môn IT
+                                            </p>
+                                            <p className="text-[12px] text-[#333] leading-[10px] mb-[14px]">
+                                                Học cách đây 1 tháng trước
+                                            </p>
+                                            <div className="w-full h-[8px] bg-[#e7e7e7] rounded-[16px] relative before:content-[''] before:absolute before:w-[80%] before:bg-primary before:h-full before:rounded-tl-[16px] before:rounded-bl-[16px]"></div>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center w-full gap-[15px] cursor-pointer hover:bg-[#e6e6e6] px-3 py-2 rounded-[10px]">
+                                        <img
+                                            src="https://files.fullstack.edu.vn/f8-prod/courses/6.png"
+                                            alt=""
+                                            className="w-[130px] h-[70px] object-cover rounded-[6px] cursor-pointer"
+                                        />
+                                        <div className="flex-1">
+                                            <p className="cursor-pointer text-[16px] font-semibold mb-[10px] leading-[10px]">
+                                                Kiến thức nhập môn IT
+                                            </p>
+                                            <p className="text-[12px] text-[#333] leading-[10px] mb-[14px]">
+                                                Học cách đây 1 tháng trước
+                                            </p>
+                                            <div className="w-full h-[8px] bg-[#e7e7e7] rounded-[16px] relative before:content-[''] before:absolute before:w-[80%] before:bg-primary before:h-full before:rounded-tl-[16px] before:rounded-bl-[16px]"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    )}
+                        )}
+                    </div>
+                    <div className="">
+                        <icons.IoSearch className="text-[23px] text-[#7c7c7c] cursor-pointer hidden max-mobile-sm:block" />
+                    </div>
+                    <div className="">
+                        <icons.FaBell
+                            className="text-[20px] text-[#7c7c7c] cursor-pointer hover:text-[#444]"
+                            onClick={() => {
+                                setActiveNotifi(!activeNotifi);
+                            }}
+                        />
+                        {activeNotifi && (
+                            <div className="absolute top-[55px] right-[50px] max-laptop:top-[35px] max-laptop:right-[0] bg-[#fff] w-[380px] max-laptop:w-[500px] max-mobile:w-[400px] max-h-[540px] overflow-hidden rounded-[10px] z-10 shadow-main">
+                                <div className="sticky top-0 left-0 right-0 z-20 bg-[#fff] flex items-center justify-between px-5 py-4">
+                                    <h3 className="text-[18px] font-semibold leading-[10px]">
+                                        Thông báo
+                                    </h3>
+                                    <p className="text-[14px] text-primary hover:bg-[#f0f0f0] cursor-pointer p-2 rounded-[6px] leading-[10px]">
+                                        Đánh dấu đã đọc
+                                    </p>
+                                </div>
+                                <div className="flex-col p-2 overflow-y-scroll max-h-[540px]">
+                                    <div className="flex items-start w-full gap-[15px] cursor-pointer bg-[rgba(240,81,35,.1)] mb-[10px] p-3 rounded-[10px]">
+                                        <img
+                                            src="https://fullstack.edu.vn/assets/images/f8_avatar.png"
+                                            alt=""
+                                            className="w-[45px] h-[45px] object-cover rounded-full cursor-pointer"
+                                        />
+                                        <div className="flex-1">
+                                            <p className="cursor-pointer text-[15px] mb-[10px] leading-[20px]">
+                                                <strong>Mister Tino</strong> đã
+                                                nhắc tới bạn trong một bình
+                                                luận.
+                                            </p>
+                                            <p className="text-[13px] text-primary leading-[10px]">
+                                                1 tháng trước
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start w-full gap-[15px] cursor-pointer bg-[rgba(240,81,35,.1)] mb-[10px] p-3 rounded-[10px]">
+                                        <img
+                                            src="https://fullstack.edu.vn/assets/images/f8_avatar.png"
+                                            alt=""
+                                            className="w-[45px] h-[45px] object-cover rounded-full cursor-pointer"
+                                        />
+                                        <div className="flex-1">
+                                            <p className="cursor-pointer text-[15px] mb-[10px] leading-[20px]">
+                                                <strong>Mister Tino</strong> đã
+                                                nhắc tới bạn trong một bình
+                                                luận.
+                                            </p>
+                                            <p className="text-[13px] text-primary leading-[10px]">
+                                                1 tháng trước
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start w-full gap-[15px] cursor-pointer bg-[rgba(240,81,35,.1)] mb-[10px] p-3 rounded-[10px]">
+                                        <img
+                                            src="https://fullstack.edu.vn/assets/images/f8_avatar.png"
+                                            alt=""
+                                            className="w-[45px] h-[45px] object-cover rounded-full cursor-pointer"
+                                        />
+                                        <div className="flex-1">
+                                            <p className="cursor-pointer text-[15px] mb-[10px] leading-[20px]">
+                                                <strong>Mister Tino</strong> đã
+                                                nhắc tới bạn trong một bình
+                                                luận.
+                                            </p>
+                                            <p className="text-[13px] text-primary leading-[10px]">
+                                                1 tháng trước
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start w-full gap-[15px] cursor-pointer bg-[rgba(240,81,35,.1)] mb-[10px] p-3 rounded-[10px]">
+                                        <img
+                                            src="https://fullstack.edu.vn/assets/images/f8_avatar.png"
+                                            alt=""
+                                            className="w-[45px] h-[45px] object-cover rounded-full cursor-pointer"
+                                        />
+                                        <div className="flex-1">
+                                            <p className="cursor-pointer text-[15px] mb-[10px] leading-[20px]">
+                                                <strong>Mister Tino</strong> đã
+                                                nhắc tới bạn trong một bình
+                                                luận.
+                                            </p>
+                                            <p className="text-[13px] text-primary leading-[10px]">
+                                                1 tháng trước
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start w-full gap-[15px] cursor-pointer bg-[rgba(240,81,35,.1)] mb-[10px] p-3 rounded-[10px]">
+                                        <img
+                                            src="https://fullstack.edu.vn/assets/images/f8_avatar.png"
+                                            alt=""
+                                            className="w-[45px] h-[45px] object-cover rounded-full cursor-pointer"
+                                        />
+                                        <div className="flex-1">
+                                            <p className="cursor-pointer text-[15px] mb-[10px] leading-[20px]">
+                                                <strong>Mister Tino</strong> đã
+                                                nhắc tới bạn trong một bình
+                                                luận.
+                                            </p>
+                                            <p className="text-[13px] text-primary leading-[10px]">
+                                                1 tháng trước
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start w-full gap-[15px] cursor-pointer bg-[rgba(240,81,35,.1)] mb-[10px] p-3 rounded-[10px]">
+                                        <img
+                                            src="https://fullstack.edu.vn/assets/images/f8_avatar.png"
+                                            alt=""
+                                            className="w-[45px] h-[45px] object-cover rounded-full cursor-pointer"
+                                        />
+                                        <div className="flex-1">
+                                            <p className="cursor-pointer text-[15px] mb-[10px] leading-[20px]">
+                                                <strong>Mister Tino</strong> đã
+                                                nhắc tới bạn trong một bình
+                                                luận.
+                                            </p>
+                                            <p className="text-[13px] text-primary leading-[10px]">
+                                                1 tháng trước
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start w-full gap-[15px] cursor-pointer bg-[rgba(240,81,35,.1)] mb-[10px] p-3 rounded-[10px]">
+                                        <img
+                                            src="https://fullstack.edu.vn/assets/images/f8_avatar.png"
+                                            alt=""
+                                            className="w-[45px] h-[45px] object-cover rounded-full cursor-pointer"
+                                        />
+                                        <div className="flex-1">
+                                            <p className="cursor-pointer text-[15px] mb-[10px] leading-[20px]">
+                                                <strong>Mister Tino</strong> đã
+                                                nhắc tới bạn trong một bình
+                                                luận.
+                                            </p>
+                                            <p className="text-[13px] text-primary leading-[10px]">
+                                                1 tháng trước
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-start w-full gap-[15px] cursor-pointer bg-[rgba(240,81,35,.1)] mb-[10px] p-3 rounded-[10px]">
+                                        <img
+                                            src="https://fullstack.edu.vn/assets/images/f8_avatar.png"
+                                            alt=""
+                                            className="w-[45px] h-[45px] object-cover rounded-full cursor-pointer"
+                                        />
+                                        <div className="flex-1">
+                                            <p className="cursor-pointer text-[15px] mb-[10px] leading-[20px]">
+                                                <strong>Mister Tino</strong> đã
+                                                nhắc tới bạn trong một bình
+                                                luận.
+                                            </p>
+                                            <p className="text-[13px] text-primary leading-[10px]">
+                                                1 tháng trước
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-start w-full gap-[15px] cursor-pointer bg-[rgba(240,81,35,.1)] mb-[10px] p-3 rounded-[10px]">
+                                        <img
+                                            src="https://fullstack.edu.vn/assets/images/f8_avatar.png"
+                                            alt=""
+                                            className="w-[45px] h-[45px] object-cover rounded-full cursor-pointer"
+                                        />
+                                        <div className="flex-1">
+                                            <p className="cursor-pointer text-[15px] mb-[10px] leading-[20px]">
+                                                <strong>Mister Tino</strong> đã
+                                                nhắc tới bạn trong một bình
+                                                luận.
+                                            </p>
+                                            <p className="text-[13px] text-primary leading-[10px]">
+                                                1 tháng trước
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="sticky bottom-0 left-0 right-0 z-20 bg-[#fff] text-center px-5 py-4">
+                                    <h3 className="cursor-pointer text-[14px] font-semibold leading-[10px] text-primary">
+                                        Xem tất cả thông báo
+                                    </h3>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                    <div className="max-laptop:hidden relative">
+                        <img
+                            src={userLogged?.avatar}
+                            alt="Avatar"
+                            className="h-[36px] w-[36px] rounded-full cursor-pointer object-cover"
+                            onClick={() => {
+                                setActiveProfile(!activeProfile);
+                            }}
+                        />
+                        {activeProfile && (
+                            <div className="absolute top-[40px] right-[0px] min-w-[300px] h-[400px] bg-[#fff] py-[20px] px-[25px] rounded-[10px] z-10 shadow-main">
+                                <div className="mb-[20px] flex items-center gap-[10px]">
+                                    <img
+                                        src={userLogged?.avatar}
+                                        alt="avatar"
+                                        className="w-[60px] h-[60px] rounded-full object-cover"
+                                    />
+                                    <div className="">
+                                        <h3 className="text-[16px] font-semibold text-[#000] leading-[10px] mb-[10px]">
+                                            {userLogged?.fullname}
+                                        </h3>
+                                        <p className="text-[14px] text-[#555] leading-[10px]">
+                                            {`@${userLogged?.username}`}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="w-full h-[1px] bg-[#f3f3f3] my-[10px]"></div>
+                                <ul>
+                                    <NavLink to="/">
+                                        <li className="w-full leading-[40px]">
+                                            <span className="text-[14px] text-[#333]">
+                                                Trang cá nhân
+                                            </span>
+                                        </li>
+                                    </NavLink>
+                                </ul>
+                                <div className="w-full h-[1px] bg-[#f3f3f3] my-[10px]"></div>
+                                <ul>
+                                    <NavLink to="/">
+                                        <li className="w-full leading-[40px]">
+                                            <span className="text-[14px] text-[#333]">
+                                                Viết blog
+                                            </span>
+                                        </li>
+                                    </NavLink>
+                                    <NavLink to="/">
+                                        <li className="w-full leading-[40px]">
+                                            <span className="text-[14px] text-[#333]">
+                                                Bài viết của tôi
+                                            </span>
+                                        </li>
+                                    </NavLink>
+                                    <NavLink to="/">
+                                        <li className="w-full leading-[40px]">
+                                            <span className="text-[14px] text-[#333]">
+                                                Bài viết đã lưu
+                                            </span>
+                                        </li>
+                                    </NavLink>
+                                </ul>
+                                <div className="w-full h-[1px] bg-[#f3f3f3] my-[10px]"></div>
+                                <ul>
+                                    <NavLink to="/">
+                                        <li className="w-full leading-[40px]">
+                                            <span className="text-[14px] text-[#333]">
+                                                Cài đặt
+                                            </span>
+                                        </li>
+                                    </NavLink>
+                                    <NavLink to="/">
+                                        <li className="w-full leading-[40px]">
+                                            <span
+                                                className="text-[14px] text-[#333]"
+                                                onClick={() =>
+                                                    setUserLogged(undefined)
+                                                }
+                                            >
+                                                Đăng xuất
+                                            </span>
+                                        </li>
+                                    </NavLink>
+                                </ul>
+                            </div>
+                        )}
+                    </div>
                 </div>
-                <div className="">
-                    <icons.IoSearch className="text-[23px] text-[#7c7c7c] cursor-pointer hidden max-mobile-sm:block" />
-                </div>
-                <div className="">
-                    <icons.FaBell
-                        className="text-[20px] text-[#7c7c7c] cursor-pointer hover:text-[#444]"
+            ) : (
+                <div className="flex items-center gap-[20px]">
+                    <button
+                        className="text-[16px] font-semibold"
                         onClick={() => {
-                            setActiveNotifi(!activeNotifi);
+                            setIsRegister(false);
+                            setActiveForm(!activeForm);
                         }}
-                    />
-                    {activeNotifi && (
-                        <div className="absolute top-[55px] right-[50px] max-laptop:top-[35px] max-laptop:right-[0] bg-[#fff] w-[380px] max-laptop:w-[500px] max-mobile:w-[400px] max-h-[540px] overflow-hidden rounded-[10px] z-10 shadow-main">
-                            <div className="sticky top-0 left-0 right-0 z-20 bg-[#fff] flex items-center justify-between px-5 py-4">
-                                <h3 className="text-[18px] font-semibold leading-[10px]">
-                                    Thông báo
-                                </h3>
-                                <p className="text-[14px] text-primary hover:bg-[#f0f0f0] cursor-pointer p-2 rounded-[6px] leading-[10px]">
-                                    Đánh dấu đã đọc
-                                </p>
-                            </div>
-                            <div className="flex-col p-2 overflow-y-scroll max-h-[540px]">
-                                <div className="flex items-start w-full gap-[15px] cursor-pointer bg-[rgba(240,81,35,.1)] mb-[10px] p-3 rounded-[10px]">
-                                    <img
-                                        src="https://fullstack.edu.vn/assets/images/f8_avatar.png"
-                                        alt=""
-                                        className="w-[45px] h-[45px] object-cover rounded-full cursor-pointer"
-                                    />
-                                    <div className="flex-1">
-                                        <p className="cursor-pointer text-[15px] mb-[10px] leading-[20px]">
-                                            <strong>Mister Tino</strong> đã nhắc
-                                            tới bạn trong một bình luận.
-                                        </p>
-                                        <p className="text-[13px] text-primary leading-[10px]">
-                                            1 tháng trước
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="flex items-start w-full gap-[15px] cursor-pointer bg-[rgba(240,81,35,.1)] mb-[10px] p-3 rounded-[10px]">
-                                    <img
-                                        src="https://fullstack.edu.vn/assets/images/f8_avatar.png"
-                                        alt=""
-                                        className="w-[45px] h-[45px] object-cover rounded-full cursor-pointer"
-                                    />
-                                    <div className="flex-1">
-                                        <p className="cursor-pointer text-[15px] mb-[10px] leading-[20px]">
-                                            <strong>Mister Tino</strong> đã nhắc
-                                            tới bạn trong một bình luận.
-                                        </p>
-                                        <p className="text-[13px] text-primary leading-[10px]">
-                                            1 tháng trước
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="flex items-start w-full gap-[15px] cursor-pointer bg-[rgba(240,81,35,.1)] mb-[10px] p-3 rounded-[10px]">
-                                    <img
-                                        src="https://fullstack.edu.vn/assets/images/f8_avatar.png"
-                                        alt=""
-                                        className="w-[45px] h-[45px] object-cover rounded-full cursor-pointer"
-                                    />
-                                    <div className="flex-1">
-                                        <p className="cursor-pointer text-[15px] mb-[10px] leading-[20px]">
-                                            <strong>Mister Tino</strong> đã nhắc
-                                            tới bạn trong một bình luận.
-                                        </p>
-                                        <p className="text-[13px] text-primary leading-[10px]">
-                                            1 tháng trước
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="flex items-start w-full gap-[15px] cursor-pointer bg-[rgba(240,81,35,.1)] mb-[10px] p-3 rounded-[10px]">
-                                    <img
-                                        src="https://fullstack.edu.vn/assets/images/f8_avatar.png"
-                                        alt=""
-                                        className="w-[45px] h-[45px] object-cover rounded-full cursor-pointer"
-                                    />
-                                    <div className="flex-1">
-                                        <p className="cursor-pointer text-[15px] mb-[10px] leading-[20px]">
-                                            <strong>Mister Tino</strong> đã nhắc
-                                            tới bạn trong một bình luận.
-                                        </p>
-                                        <p className="text-[13px] text-primary leading-[10px]">
-                                            1 tháng trước
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="flex items-start w-full gap-[15px] cursor-pointer bg-[rgba(240,81,35,.1)] mb-[10px] p-3 rounded-[10px]">
-                                    <img
-                                        src="https://fullstack.edu.vn/assets/images/f8_avatar.png"
-                                        alt=""
-                                        className="w-[45px] h-[45px] object-cover rounded-full cursor-pointer"
-                                    />
-                                    <div className="flex-1">
-                                        <p className="cursor-pointer text-[15px] mb-[10px] leading-[20px]">
-                                            <strong>Mister Tino</strong> đã nhắc
-                                            tới bạn trong một bình luận.
-                                        </p>
-                                        <p className="text-[13px] text-primary leading-[10px]">
-                                            1 tháng trước
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="flex items-start w-full gap-[15px] cursor-pointer bg-[rgba(240,81,35,.1)] mb-[10px] p-3 rounded-[10px]">
-                                    <img
-                                        src="https://fullstack.edu.vn/assets/images/f8_avatar.png"
-                                        alt=""
-                                        className="w-[45px] h-[45px] object-cover rounded-full cursor-pointer"
-                                    />
-                                    <div className="flex-1">
-                                        <p className="cursor-pointer text-[15px] mb-[10px] leading-[20px]">
-                                            <strong>Mister Tino</strong> đã nhắc
-                                            tới bạn trong một bình luận.
-                                        </p>
-                                        <p className="text-[13px] text-primary leading-[10px]">
-                                            1 tháng trước
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="flex items-start w-full gap-[15px] cursor-pointer bg-[rgba(240,81,35,.1)] mb-[10px] p-3 rounded-[10px]">
-                                    <img
-                                        src="https://fullstack.edu.vn/assets/images/f8_avatar.png"
-                                        alt=""
-                                        className="w-[45px] h-[45px] object-cover rounded-full cursor-pointer"
-                                    />
-                                    <div className="flex-1">
-                                        <p className="cursor-pointer text-[15px] mb-[10px] leading-[20px]">
-                                            <strong>Mister Tino</strong> đã nhắc
-                                            tới bạn trong một bình luận.
-                                        </p>
-                                        <p className="text-[13px] text-primary leading-[10px]">
-                                            1 tháng trước
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start w-full gap-[15px] cursor-pointer bg-[rgba(240,81,35,.1)] mb-[10px] p-3 rounded-[10px]">
-                                    <img
-                                        src="https://fullstack.edu.vn/assets/images/f8_avatar.png"
-                                        alt=""
-                                        className="w-[45px] h-[45px] object-cover rounded-full cursor-pointer"
-                                    />
-                                    <div className="flex-1">
-                                        <p className="cursor-pointer text-[15px] mb-[10px] leading-[20px]">
-                                            <strong>Mister Tino</strong> đã nhắc
-                                            tới bạn trong một bình luận.
-                                        </p>
-                                        <p className="text-[13px] text-primary leading-[10px]">
-                                            1 tháng trước
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start w-full gap-[15px] cursor-pointer bg-[rgba(240,81,35,.1)] mb-[10px] p-3 rounded-[10px]">
-                                    <img
-                                        src="https://fullstack.edu.vn/assets/images/f8_avatar.png"
-                                        alt=""
-                                        className="w-[45px] h-[45px] object-cover rounded-full cursor-pointer"
-                                    />
-                                    <div className="flex-1">
-                                        <p className="cursor-pointer text-[15px] mb-[10px] leading-[20px]">
-                                            <strong>Mister Tino</strong> đã nhắc
-                                            tới bạn trong một bình luận.
-                                        </p>
-                                        <p className="text-[13px] text-primary leading-[10px]">
-                                            1 tháng trước
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="sticky bottom-0 left-0 right-0 z-20 bg-[#fff] text-center px-5 py-4">
-                                <h3 className="cursor-pointer text-[14px] font-semibold leading-[10px] text-primary">
-                                    Xem tất cả thông báo
-                                </h3>
-                            </div>
-                        </div>
-                    )}
+                    >
+                        Đăng nhập
+                    </button>
+                    <button
+                        className="text-[16px] font-semibold bg-primary px-[20px] leading-[40px] rounded-[20px] text-[#fff]"
+                        onClick={() => {
+                            setIsRegister(true);
+                            setActiveForm(!activeForm);
+                        }}
+                    >
+                        Đăng ký
+                    </button>
                 </div>
-                <div className="max-laptop:hidden">
-                    <img
-                        src={avatar}
-                        alt="Avatar"
-                        className="h-[30px] w-[30px] rounded-full cursor-pointer"
-                    />
-                </div>
-            </div>
+            )}
+
+            {activeForm && (
+                <Form
+                    isRegister={isRegister}
+                    setIsRegister={setIsRegister}
+                    setActiveForm={setActiveForm}
+                    setUserLogged={setUserLogged}
+                />
+            )}
         </div>
     );
 };

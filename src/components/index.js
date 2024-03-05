@@ -11,3 +11,5 @@ export { default as PostList } from "./Post/PostList";
 export { default as PostItem } from "./Post/PostItem";
 export { default as LearningItem } from "./Learning/LearningItem";
 export { default as BlogItem } from "./Blog/BlogItem";
+export { default as Form } from "./Form/Form";
+export { default as Input } from "./Input/Input";
