@@ -9,6 +9,7 @@ module.exports = {
             backgroundColor: {
                 footerColor: "#181821",
                 overlay: "rgba(0,0,0,.3)",
+                overlay2: "rgba(0,0,0,.5)",
             },
             boxShadow: {
                 main: "0 -4px 32px rgba(0,0,0,.2)",

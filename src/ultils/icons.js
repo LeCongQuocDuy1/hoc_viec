@@ -14,6 +14,8 @@ import {
     FaArrowUp,
     FaUser,
     FaTimes,
+    FaArrowRight,
+    FaUserEdit,
 } from "react-icons/fa";
 import { FaRoad, FaUsers, FaCircleCheck, FaBookOpen } from "react-icons/fa6";
 import { FiPlus } from "react-icons/fi";
@@ -48,5 +50,7 @@ const icons = {
     MdLogout,
     IoSettingsSharp,
     FaTimes,
+    FaArrowRight,
+    FaUserEdit,
 };
 export default icons;

@@ -7,6 +7,9 @@ Radio
 Checkbox
 Multi Checkbox
 
+nút mũi tên: validation (fullname, username, email, avatar, password, rePassword), sau đó thì chuyển qua trang 2
+nút đăng ký: validation (level) trang 2, sau đó thì đăng ký
+
 
 
 

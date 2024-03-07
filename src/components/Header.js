@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 import avatar from "../assets/avatar.jpg";
 import icons from "../ultils/icons";
@@ -50,6 +50,13 @@ const Header = () => {
             remainLangs.map((item) => (item.isActive = false));
         }
     };
+
+    useEffect(() => {
+        const bodyElement = document.body;
+        if (activeForm) {
+            bodyElement.style.overflow = "hidden";
+        }
+    }, [activeForm]);
 
     return (
         <div className="fixed z-10 bg-[#fff] flex items-center justify-between h-[65px] px-[28px] inset-0 border-b-[1px] border-[#ececec] leading-[65px] w-full">

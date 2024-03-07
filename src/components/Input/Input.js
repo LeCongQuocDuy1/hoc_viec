@@ -1,4 +1,6 @@
 import React from "react";
+import PasswordStrengthBar from "react-password-strength-bar";
+import { validation } from "../../ultils/validations";
 
 const Input = ({
     setPayload,
@@ -10,6 +12,7 @@ const Input = ({
     id,
     invalidFields,
     setInvalidFields,
+    isRegister,
 }) => {
     const handleChangeInput = (e) => {
         const { name, value } = e.target;
@@ -17,6 +20,28 @@ const Input = ({
             ...prev,
             [name]: value,
         }));
+
+        if (value !== "") {
+            let currentInvalidFields = [...invalidFields];
+            currentInvalidFields = currentInvalidFields.filter(
+                (item) => item.name !== name
+            );
+            setInvalidFields([...currentInvalidFields]);
+            validation(
+                {
+                    [name]: value,
+                },
+                setInvalidFields
+            );
+        } else {
+            validation(
+                {
+                    [name]: "",
+                },
+                setInvalidFields
+            );
+            setInvalidFields(invalidFields);
+        }
     };
 
     const handleUploadAvatar = (e) => {
@@ -74,8 +99,19 @@ const Input = ({
                 onChange={
                     type === "file" ? handleUploadAvatar : handleChangeInput
                 }
-                onFocus={() => setInvalidFields && setInvalidFields([])}
+                // onBlur={() =>
+                //     setInvalidFields &&
+                //     setInvalidFields(
+                //         invalidFields.filter((item) => item.name !== name)
+                //     )
+                // }
             />
+            {name === "password" && payload !== "" && isRegister && (
+                <PasswordStrengthBar
+                    password={name === "password" ? payload : ""}
+                    className="leading-[5px] password-bar"
+                />
+            )}
             <div className="leading-none">
                 {invalidFields.some((item) => item.name === name) && (
                     <span className="text-red-500 text-[13px]">

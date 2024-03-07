@@ -2,20 +2,39 @@ export const validation = (payload, setInvalidFields) => {
     let invalid = 0;
 
     const formatPayload = Object.entries(payload);
-    console.log(formatPayload);
+    const newFormatPayload = formatPayload.filter(
+        (item) => item[0] !== "rePassword"
+    );
 
-    for (let item of formatPayload) {
-        if (item[1].trim() === "") {
-            invalid++;
-            setInvalidFields((prev) => [
-                ...prev,
-                {
-                    name: item[0],
-                    message: `${
-                        item[0].charAt(0).toUpperCase() + item[0].slice(1)
-                    } is required!`,
-                },
-            ]);
+    for (let item of newFormatPayload) {
+        if (typeof item[1] === "string") {
+            if (item[1].trim() === "") {
+                invalid++;
+                setInvalidFields((prev) => [
+                    ...prev,
+                    {
+                        name: item[0],
+                        message: `${
+                            item[0].charAt(0).toUpperCase() + item[0].slice(1)
+                        } is required!`,
+                    },
+                ]);
+            }
+        }
+
+        if (Array.isArray(item[1])) {
+            if (item[1].length === 0) {
+                invalid++;
+                setInvalidFields((prev) => [
+                    ...prev,
+                    {
+                        name: item[0],
+                        message: `${
+                            item[0].charAt(0).toUpperCase() + item[0].slice(1)
+                        } is required!`,
+                    },
+                ]);
+            }
         }
     }
     for (let item of formatPayload) {

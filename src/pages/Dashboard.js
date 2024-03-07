@@ -19,7 +19,7 @@ const Dashboard = () => {
     }, [scrollValue]);
 
     return (
-        <div className="pt-[80px] bg-[#fff] relative">
+        <div className="pt-[80px] bg-[#fff] relative overflow-hidden">
             <Header />
             <div className="flex mb-[80px]">
                 <Sidebar />

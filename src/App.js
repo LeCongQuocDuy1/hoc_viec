@@ -1,10 +1,13 @@
 import { Routes, Route } from "react-router-dom";
 import { Dashboard, Home, Blog, LearningPath } from "./pages";
 import path from "./ultils/path";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
     return (
         <div className="App">
+            <ToastContainer />
             <Routes>
                 <Route path={path.DASHBOARD} element={<Dashboard />}>
                     <Route path={path.HOME} element={<Home />} />
